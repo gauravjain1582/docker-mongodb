@@ -1,0 +1,62 @@
+version: '3.5'
+services:
+  mdbS1:
+    image: mongo:latest
+    command: mongod --replSet mdb_repSet
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname == worker01"
+    networks:
+      -  traefik
+    volumes:
+      - mongodb_datav1:/data/db
+      - mongodb_configv1:/data/configdb
+    networks:
+      - mdbnw
+
+  mdbS2:
+    image: mongo:latest
+    command: mongod --replSet mdb_repSet
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname == worker01"
+    networks:
+      -  traefik
+    #ports:
+    #  - "27017:27017"
+    volumes:
+      - mongodb_datav2:/data/db
+      - mongodb_configv2:/data/configdb
+    networks:
+      - mdbnw
+
+  mdbS3:
+    image: mongo:latest
+    command: mongod --replSet mdb_repSet
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname == worker01"
+    networks:
+      -  traefik
+    #ports:
+    #  - "27017:27017"
+    volumes:
+      - mongodb_datav3:/data/db
+      - mongodb_configv3:/data/configdb
+    networks:
+      - mdbnw
+
+volumes:
+  mongodb_datav1:
+  mongodb_configv1:
+  mongodb_datav2:
+  mongodb_configv2:
+  mongodb_datav3:
+  mongodb_configv3:
+
+networks:
+  mdbnw:
+    name: mdbnw
