@@ -5,7 +5,6 @@ node("docker-test") {
     sh "hostname"
     sh 'docker stack deploy --compose-file docker_compose.yml mongoDBStack'
     sh './init_replication.sh'
-    sh '${WORKSPACE}/init_replication.sh'
-    sh 'deploy_mongo_express_gui.sh'
+    sh './deploy_mongo_express_gui.sh'
   }
 }

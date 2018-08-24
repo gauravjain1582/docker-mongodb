@@ -1,8 +1,4 @@
-# docker pull mongo-express
-# run mongo-express container link with mongoDB (container)
-# to get UI access for MongoDB have to run this container in run-time
-# mongoDB container is already running
-#docker run --link 8a654ed1e607:mongo -p 8881:8081 mongo-express
+#!/bin/sh
 docker service create --replicas 1 \
 --publish 8881:8081 \
 --env ME_CONFIG_MONGODB_SERVER="mongoDBStack_mdbS1" \
